@@ -6,24 +6,22 @@ class LogisticRegressionUsingGD:
 
     @staticmethod
     def sigmoid(x):
-        """Activation function used to map any real value between 0 and 1"""
+        # Activation function used to map any real value between 0 and 1
         return 1 / (1 + np.exp(-x))
 
     @staticmethod
     def net_input(theta, x):
-        """Computes the weighted sum of inputs
-            Similar to Linear Regression
+        # Computes the weighted sum of inputs Similar to Linear Regression
 
-        """
         return np.dot(x, theta)
 
     def probability(self, theta, x):
-        """ Calculates the probability that an instance belongs to a particular class
-        """
+        # Calculates the probability that an instance belongs to a particular class
+
         return self.sigmoid(self.net_input(theta, x))
 
     def cost_function(self, theta, x, y):
-        """Computes the cost function for all the training samples"""
+        # Computes the cost function for all the training samples
         m = x.shape[0]
         total_cost = -(1 / m) * np.sum(
             y * np.log(self.probability(theta, x)) + (1 - y) * np.log(
@@ -31,7 +29,7 @@ class LogisticRegressionUsingGD:
         return total_cost
 
     def gradient(self, theta, x, y):
-        """Computes the gradient of the cost function at the point theta"""
+        # Computes the gradient of the cost function at the point theta
         m = x.shape[0]
         return (1 / m) * np.dot(x.T, self.sigmoid(self.net_input(theta, x)) - y)
 
