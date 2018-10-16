@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from LogisticRegression.Model import LogisticRegressionUsingGD
+from sklearn.metrics import accuracy_score
 
 
 def load_data(path, header):
@@ -57,6 +58,8 @@ if __name__ == "__main__":
     y_values = - (parameters[0] + np.dot(parameters[1], x_values)) / parameters[2]
 
     plt.plot(x_values, y_values, label='Decision Boundary')
+    plt.xlabel('Marks in 1st Exam')
+    plt.ylabel('Marks in 2nd Exam')
     plt.legend()
     plt.show()
 
@@ -64,5 +67,9 @@ if __name__ == "__main__":
     model = LogisticRegression()
     model.fit(X, y)
     parameters = model.coef_
+    predicted_classes = model.predict(X)
+    accuracy = accuracy_score(y.flatten(),predicted_classes)
+    print('The accuracy score using scikit-learn is {}'.format(accuracy))
     print("The model parameters using scikit learn")
     print(parameters)
+
